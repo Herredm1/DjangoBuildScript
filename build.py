@@ -1,6 +1,4 @@
-import os, subprocess, sys
-import signal
-import pyautogui
+import os, subprocess
 import time
 
 
@@ -9,9 +7,6 @@ projectName = input('Please enter a valid Django Project Name: ').lower()
 appName = input('Please enter a valid Djnago App name: ').lower()
 appFolder = input(R'Enter App location(will create a new directory in this directory): ')
 
-# projectName = 'testeroni'
-# appName = 'testapp'
-# appFolder = R'C:\Users\lug_n\OneDrive\Desktop'
 
 settings_path = os.path.join(appFolder,projectName,projectName,'settings.py')
 manage_path = os.path.join(appFolder,projectName,'manage.py')
@@ -33,6 +28,7 @@ p = subprocess.call([
     'mkdir templates\n'
     'cd ./templates\n'
     'mkdir pages\n'
+    
     
     
 ])
@@ -59,7 +55,7 @@ with open('runserver.ps1','w') as file:
     file.writelines('.\\env\\scripts\\activate\n')
     file.writelines(R'python.exe .\manage.py runserver'),
 
-script = subprocess.Popen(["powershell.exe", "-File", "runserver.ps1"])
+script = subprocess.Popen(["powershell", "powershell -executionpolicy ByPass -File .\\runserver.ps1"])
 
 time.sleep(5)
 
