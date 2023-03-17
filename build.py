@@ -1,12 +1,25 @@
 import os, subprocess
 import time
+from validation import validate_Name
+
+
 
 
 #Name and Location Variables
-projectName = input('Please enter a valid Django Project Name: ').lower()
-appName = input('Please enter a valid Djnago App name: ').lower()
-appFolder = input(R'Enter App location(will create a new directory in this directory): ')
+pName_Condition = 0
+while pName_Condition == 0:
+    projectName = input('Please enter a valid Django Project Name: ').lower()
+    validate_Name(projectName, pName_Condition)
 
+appName_Condition = 0        
+while appName_Condition == 0:
+    appName = input('Please enter a valid Djnago App name: ').lower()
+    appFolder = validate_Name(appName, appName_Condition)
+    
+appFolder_Condition = 0
+while appFolder_Condition == 0:    
+    appFolder = input(R'Enter App location(will create a new directory in this directory): ')
+    appFolder_Condition = validate_Name(appFolder, appFolder_Condition)
 
 settings_path = os.path.join(appFolder,projectName,projectName,'settings.py')
 manage_path = os.path.join(appFolder,projectName,'manage.py')
