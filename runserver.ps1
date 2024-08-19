@@ -1,3 +1,3 @@
-cd C:\Users\lug_n\OneDrive\Desktop\Git\Personal\Hypervize.me\hypervise
-.\env\scripts\activate
+cd C:\Users\lug_n\OneDrive\Desktop\Git\Personal\hypervise
+.\.venv\scripts\activate
 python.exe .\manage.py runserver

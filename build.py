@@ -2,9 +2,6 @@ import os, subprocess
 import time
 from validation import validate_Name
 
-
-
-
 #Name and Location Variables
 pName_Condition = 0
 while pName_Condition == 0:
@@ -31,19 +28,16 @@ p = subprocess.call([
     'powershell.exe',
     f'cd {appFolder}\n'
     f'mkdir {projectName}\n'
-    f'cd .\{projectName}\n'
-    'py -m venv env\n'
-    '.\\env\\scripts\\activate\n'
+    f'cd .\\{projectName}\n'
+    'py -m venv .venv\n'
+    '.\\.venv\\scripts\\activate\n'
     'pip install django\n'
     f'django-admin startproject {projectName} .\n'
     f'python manage.py startapp {appName}\n'
     'new-item runserver.ps1\n'
     'mkdir templates\n'
     'cd ./templates\n'
-    'mkdir pages\n'
-    
-    
-    
+    'mkdir pages\n'  
 ])
 
 #Edit settings
@@ -65,7 +59,7 @@ with open(settings_path, 'w') as file:
 
 with open('runserver.ps1','w') as file:
     file.writelines(f'cd {project_dir}\n')
-    file.writelines('.\\env\\scripts\\activate\n')
+    file.writelines('.\\.venv\\scripts\\activate\n')
     file.writelines(R'python.exe .\manage.py runserver'),
 
 script = subprocess.Popen(["powershell", "powershell -executionpolicy ByPass -File .\\runserver.ps1"])
