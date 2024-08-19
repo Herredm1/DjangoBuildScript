@@ -9,12 +9,12 @@ from validation import validate_Name
 pName_Condition = 0
 while pName_Condition == 0:
     projectName = input('Please enter a valid Django Project Name: ').lower()
-    validate_Name(projectName, pName_Condition)
+    pName_Condition = validate_Name(projectName, pName_Condition)
 
 appName_Condition = 0        
 while appName_Condition == 0:
     appName = input('Please enter a valid Djnago App name: ').lower()
-    appFolder = validate_Name(appName, appName_Condition)
+    appName_Condition = validate_Name(appName, appName_Condition)
     
 appFolder_Condition = 0
 while appFolder_Condition == 0:    
