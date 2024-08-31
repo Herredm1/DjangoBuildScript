@@ -49,15 +49,11 @@ p = subprocess.call([
     'new-item .env\n'  
 ])
 
-
-
-#Edit settings
-
+# Read settings
 with open(settings_path, 'r') as file:
     lines = file.readlines()  # Read the entire file into a list
 
 # Modify specific lines
-
 api_key = str(lines[22])[13::]
 
 static_content = "STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]\n"
@@ -78,15 +74,18 @@ lines[13] = os_content
 # Write the modified lines back to the file
 with open(settings_path, 'w') as file:
     file.writelines(lines)
-    
+
+# Add Django Secret into the env file    
 with open(env_path, 'w') as env:
     env.write(f'api_key={api_key}')
 
+# Edit the ps1 script
 with open(run_server,'w') as file:
     file.writelines(f'cd {project_dir}\n')
     file.writelines('.\\.venv\\scripts\\activate\n')
     file.writelines(R'python.exe .\manage.py runserver'),
 
+# Run the ps1 script
 script = subprocess.Popen(["powershell", f"powershell -executionpolicy ByPass -File {run_server}"])
 
 time.sleep(5)
