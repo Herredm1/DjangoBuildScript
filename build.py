@@ -22,6 +22,7 @@ settings_path = os.path.join(appFolder,projectName,projectName,'settings.py')
 manage_path = os.path.join(appFolder,projectName,'manage.py')
 project_dir = os.path.join(appFolder,projectName)
 env_path = os.path.join(project_dir, '.venv','.env')
+run_server = os.path.join(project_dir, 'runserver.ps1')
 
 
 #execute commands
@@ -48,6 +49,8 @@ p = subprocess.call([
     'new-item .env\n'  
 ])
 
+
+
 #Edit settings
 
 with open(settings_path, 'r') as file:
@@ -69,7 +72,7 @@ lines[39] = app_content
 django_secret=  "SECRET_KEY = api_key"
 lines[22] = django_secret
 
-os_content = "import os\nfrom dotenv import load_dotenv\nload_dotenv()\napi_key=os.getenv('api_key')"
+os_content = "import os\nfrom dotenv import load_dotenv\nload_dotenv()\napi_key=os.getenv('api_key')\n"
 lines[13] = os_content
 
 
@@ -82,12 +85,12 @@ with open(settings_path, 'w') as file:
 with open(env_path, 'w') as env:
     env.write(f'api_key={api_key}')
 
-with open('runserver.ps1','w') as file:
+with open(run_server,'w') as file:
     file.writelines(f'cd {project_dir}\n')
     file.writelines('.\\.venv\\scripts\\activate\n')
     file.writelines(R'python.exe .\manage.py runserver'),
 
-script = subprocess.Popen(["powershell", "powershell -executionpolicy ByPass -File .\\runserver.ps1"])
+script = subprocess.Popen(["powershell", f"powershell -executionpolicy ByPass -File {run_server}"])
 
 time.sleep(5)
 
