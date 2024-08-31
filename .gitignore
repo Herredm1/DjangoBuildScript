@@ -1,2 +1,6 @@
 __pycache__/validation.cpython-311.pyc
 __*
+build\build
+build
+dist
+build.spec
