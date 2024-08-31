@@ -74,9 +74,6 @@ lines[22] = django_secret
 
 os_content = "import os\nfrom dotenv import load_dotenv\nload_dotenv()\napi_key=os.getenv('api_key')\n"
 lines[13] = os_content
-
-
-
     
 # Write the modified lines back to the file
 with open(settings_path, 'w') as file:
